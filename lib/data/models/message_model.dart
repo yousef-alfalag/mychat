@@ -12,7 +12,7 @@ class MessageModel {
       required this.messageType,
       required this.dateTime});
 
-  Map toMap() {
+  Map<String, dynamic> toMap() {
     return {
       "sender": sender,
       "message": message,
@@ -25,7 +25,7 @@ class MessageModel {
     return MessageModel(
       sender: json["sender"],
       message: json["message"],
-      messageType: json["messageType"],
+      messageType: MessageType.values.byName(json["messageType"]),
       dateTime: json["dateTime"],
     );
   }

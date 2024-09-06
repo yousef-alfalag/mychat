@@ -8,6 +8,7 @@ import 'package:new_chat_app/core/constant/alert_services.dart';
 import 'package:new_chat_app/core/constant/routes.dart';
 import 'package:new_chat_app/core/services/my_services.dart';
 import 'package:new_chat_app/data/remote/firebase/auth/firebase_auth.dart';
+import 'package:new_chat_app/data/remote/firebase/filebase_services.dart';
 import 'package:new_chat_app/main.dart';
 import 'package:new_chat_app/screens/auth/regester_screen.dart';
 
@@ -25,6 +26,7 @@ class RegesterControllerImp extends RegesterController {
   TextEditingController nameCon = TextEditingController();
   TextEditingController emailCon = TextEditingController();
   TextEditingController passwordCon = TextEditingController();
+  final FireBaseServices fireBaseServices = FireBaseServices();
   File? imagefile;
   @override
   changeImage() async {
@@ -44,7 +46,9 @@ class RegesterControllerImp extends RegesterController {
   regester() async {
     if (imagefile != null) {
       await _auth.signUp(emailCon.text, passwordCon.text);
-      String? imageURL = await _auth.uploadImage(imagefile!);
+      String userId = firebaseAuth.currentUser!.uid;
+      String? imageURL =
+          await fireBaseServices.uploadImage(imagefile!, "Users/$userId");
       await _auth.addUserToFireStore(nameCon.text, imageURL!);
       sharedPreferences.setString("page", "2");
       sharedPreferences.setString("userId", firebaseAuth.currentUser!.uid);

@@ -30,15 +30,4 @@ class FireBaseAuth {
         .doc(newUser.userId)
         .set(newUser.toMap());
   }
-
-  Future<String?> uploadImage(File image) async {
-    String userId = firebaseAuth.currentUser!.uid;
-    Reference fileRef = firebaseStorage.ref("Chat App/Users/$userId");
-    UploadTask task = fileRef.putFile(image);
-    return task.then((p0) {
-      if (p0.state == TaskState.success) {
-        return fileRef.getDownloadURL();
-      }
-    });
-  }
 }

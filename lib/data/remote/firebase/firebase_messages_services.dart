@@ -1,5 +1,3 @@
-import 'dart:js_util';
-
 import 'package:path/path.dart';
 
 class MessagesServices {

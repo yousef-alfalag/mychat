@@ -25,7 +25,7 @@ class HomeScreen extends StatelessWidget {
               if (snapshot.hasData && snapshot.data != null) {
                 List<UserModel> listUser = [];
                 final List mapUsers =
-                    (snapshot.data!.docs.map((e) => e.data()).toList());
+                    (snapshot.data!.docs.map((doc) => doc.data()).toList());
                 listUser.addAll(mapUsers.map((e) => UserModel.fromjson(e)));
                 return ListView.builder(
                   itemCount: snapshot.data!.docs.length,

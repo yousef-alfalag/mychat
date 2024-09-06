@@ -9,6 +9,7 @@ class MessageItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return UnconstrainedBox(
       child: Container(
+        color: const Color.fromARGB(255, 120, 75, 197),
         child: message.messageType == MessageType.Text
             ? Text(message.message)
             : Container(
